@@ -1,1 +1,36 @@
+Task 1:
+1.1 Retrieve customer names and phone numbers
+o Each customer has an assigned salesperson. You must write a query to create a call sheet that lists:
+▪ The salesperson
+▪ A column named CustomerName that displays how the customer contact should be greeted (for example, Mr Smith)
+▪ The customer’s phone number.
 
+SELECT 
+      SalesPerson
+    , CONCAT(Title,' ',LastName) AS CustomerName
+    , Phone
+FROM SalesLT.Customers
+_______________________________________________________________________________________________________________________________
+1.2 Retrieve the heaviest products information: Transportation costs are increasing and you need to identify the heaviest products. Retrieve the names, weight of the top ten percent of products by weight. Then, add new column named Number of sell days (caculated from SellStartDate and SellEndDate) of these products (if sell end date isn't defined then get Today date)
+
+SELECT TOP 10 PERCENT
+      Weight
+    , Name
+    , CURRENT_TIMESTAMP
+    , CASE 
+          WHEN SellEndDate IS NULL THEN DATEDIFF('day',CURRENT_TIMESTAMP,SellStartDate) ELSE DATEDIFF('day',SellEndDate,SellStartDate) 
+      END AS NumberOfSellDays --Option 1-- 
+    , IIF(SellEndDate IS NULL, DATEDIFF('day',CURRENT_TIMESTAMP,SellStartDate), DATEDIFF('day',SellEndDate,SellStartDate) AS NumberOfSellDays --Option 2-- 
+    , DATEDIFF('day',SellStartDate,ISNULL(SellEndDate,CURRENT_TIMESTAMP) AS NumberOfSellDays --Option 3-- 
+FROM SalesLT.Product
+ORDER BY Weight DESC
+===============================================================================================================================
+Task 2: Retrieve customer order data
+2.1 As you continue to work with the Adventure Works customer data, you must create queries for reports that have been requested by the sales team.
+Retrieve a list of customer companies
+o You have been asked to provide a list of all customer companies in the
+format Customer ID : Company Name - for example, 78: Preferred Bikes
+
+SELECT *
+      CONCAT(CustomerID,': ', CompanyName) AS CustomerCompany
+FROM SalesLT.Customers
