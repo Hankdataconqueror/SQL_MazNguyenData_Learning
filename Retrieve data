@@ -1,0 +1,6 @@
+--
+Task 1: Retrieve data for transportation reports: The logistics manager has asked you to generate some reports Containing details of the company’s customers to help to reduce transportation costs.
+--
+1.1: Initially, you need to produce a list of all of you customers' locations. Write a Transact-SQL query that queries the SalesLT.Address table and retrieves the values for City and StateProvince, removing duplicates , then sorts in ascending order of StateProvince and descending order of City.
+--
+SELECT 
