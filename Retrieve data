@@ -43,4 +43,18 @@ WHERE ProductNumber LIKE 'BK-%[0-9] [0-9]'
 AND   ProductNumber NOT LIKE '%T%'
 AND   Color IN ('black, 'red', 'white')
 AND   Size IN ('S','M')
+_______________________________________________________________________________________________________________________________
+2.3 Retrieve specific products by product ID: Retrieve the product ID, product number, name, and list price of products whose product name contains "HL " or "Mountain", product number is at least 8 characters and never have been ordered.
+
+SELECT
+      ProductID
+    , ProductNumber
+    , Name
+    , ListPrice
+FROM SalesLT.Product
+WHERE ProductNumber LIKE '%________%'
+AND  (Name LIKE '%HL%' OR Name LIKE 'Moutain')
+AND ProductID NOT IN (SELECT DISTINCT ProductID FROM SalesLT.SalesOrderDetail)
+
+
         
