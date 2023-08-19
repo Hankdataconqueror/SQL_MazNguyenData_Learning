@@ -3,8 +3,23 @@ Adventure Works Cycles sells directly to retailers, who must be invoiced for the
 1.1 Retrieve customer orders
 o As an initial step towards generating the invoice report, write a query that returns the company name from the SalesLT.Customer table, and the sales order ID and total due from the SalesLT.SalesOrderHeader table.
 
-SELECT CompanyName FROM SalesLT.Customer
-INNER JOIN SalesLT.SalesOrderHeader
-ON Customer.CustomerID = SalesOrderHeader.CustomerID
+SELECT CompanyName
+     , SaleOrderID
+     , TotalDue
+FROM SalesLT.SalesOrderHeaderCustomer 
+INNER JOIN SalesLT.SalesOrderHeader 
+ON SalesOrderHeader.CustomerID = Customer.CustomerID
+_______________________________________________________________________________________________________________________________
+1.2 Retrieve customer orders with addresses
+Extend your customer orders query to include the Main Office address for each customer, including the full street address, city, state or province, postal code, and country or region
+Tip: Note that each customer can have multiple addressees in the SalesLT.Address table, so the database developer has created the SalesLT.CustomerAddress table to enable a many-to-many relationship between customers and addresses. Your query will need to include both of these tables, and should filter the results so that only Main Office addresses are included.
 
-SELECT SalesOrderID, TotalDue FROM SalesLT.SalesOrderHeader
+SELECT DISTINCT
+      City
+    , StateProvince
+    , PostalCode
+    , CountryRegion
+FROM 
+
+
+
